@@ -27,11 +27,11 @@ public class Lab6P1_DenisLopez {
             switch(op){
                 case 1:{
                     int[]numeros1=new int[size];
-                    numeros1=LECTURA(size);
+                    numeros1=lecturarandom(size);
                     System.out.println("Ingrese el tamano del array: ");
                     imprimir(numeros1);
-                    
-                    
+                    System.out.println("Mayor a menos: ");
+                   
                     break;
                 }
                 case 2:{
@@ -46,7 +46,11 @@ public class Lab6P1_DenisLopez {
                     break;
                 }
                 case 3:{
-                    
+                    int [] numeros3=new int[size];
+                    numeros3=llenarArray(size);
+                    System.out.println("Arreglo original:");
+                    imprimir(numeros3);
+                    imprimir(primoMayorymenor(numeros));
                     break;
                 }
                 default: {
@@ -62,6 +66,7 @@ public class Lab6P1_DenisLopez {
         System.out.println("1. Ordenamiento de arreglos");
         System.out.println("2. Producto Punto de un Vector");
         System.out.println("3. Primo mayor y menor");
+        System.out.println("4. Salir");
         System.out.println("Ingrese su opcion:");
         int opcion = leer.nextInt();
         return opcion;
@@ -91,34 +96,39 @@ public class Lab6P1_DenisLopez {
         
     }
     
-    public static int [] LECTURA(int size){
-        int temporal [] = new int [size];
-        while(size>5 && size<20){
-            for (int i=0;i<temporal.length;i++){
-            System.out.println("Array Original : ["+i+"]");
-            temporal[i]= leer.nextInt();
-        }   
-        }
-        System.out.println("Valor invalido, ingrese un tamano valido:");
-        return temporal;
-    }
-    
     public static void menorAmayor(int[] size){
         int temporal [] = new int [size.length];
-        int min= size[0];
-        int max= size[0];
+        int pos=0;
         for (int i=0; i<temporal.length;i++){
-            
+            for (int j=i+1;j<temporal.length;j++){
+                  if(size[i] > size[j]){
+                      size[i]=size[j];
+                      pos+=1;
+;                     temporal[pos]=size[j];
+                  }
+            }
         }
-        
-        
+        imprimirArreglo();    
     }
     
-    public static void mayorAmenor(){
-        
+    public static void mayorAmenor(int [] size){
+       int temporal[]=new int [size.length];
+       int pos=0;
+       for (int i=0;i<temporal.length;i++){
+           for(int j=i+1;j<temporal.length;j++){
+               if(size[i]<size[j]){
+                   size[i]=size[j];
+                  pos+=1;
+                  temporal[pos]=size[j];
+               }
+           }
+       }
+       imprimirArreglo();
     }
     
     public static void imprimirArreglo(){
+
+
         
     }
     
@@ -178,10 +188,41 @@ public class Lab6P1_DenisLopez {
         int[] temporal = new int[lista.length];
         int ubicacion=0;
         for(int i=0;i<lista.length;i++){
-            
+            if(isPrime(lista[i])==true){
+                temporal[ubicacion]=lista[i];
+                ubicacion+=1;
+            }
+            else{
+                temporal[ubicacion]=0;           
+            }
         }
         return temporal;
         
+    }
+    
+    public static int[] primoMayorymenor(int [] lista){
+        int temporal [] = new int[lista.length];
+        int min = lista[0];
+        int max = lista[0];
+        int mayor;
+        int menor;
+        for (int i=1;i<lista.length;i++){
+            if(lista[i]<min){
+                min=lista[i];
+                temporal[i]=lista[i];
+                menor=1;
+            }
+            if(lista[i]>max){
+                max=lista[i];
+                temporal[i]=lista[i];
+                mayor=0;
+            }
+            if(lista[i]==0){
+                System.out.println("No contiene arreglos.");
+            }
+            
+        }
+        return temporal;
     }
         
  }
